@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@192.168.18.31:1521:orcl"></property>
+		<property name="username" value="kitri"></property>
+		<property name="password" value="kitri"></property>		
+	</bean>
+	<bean id="memberDao" class="com.kitri.di.step10.MemberDao">
+		<constructor-arg ref="dataSource"></constructor-arg>
+	</bean>
+	
+</beans>

@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="mc1" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="안효인"/>
+		<constructor-arg value="java2"/>
+	</bean>
+	
+	<bean id="mc2" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="안효인"/>
+		<constructor-arg value="1000000000" type="double"/>
+	</bean>
+	
+	<bean id="mc3" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="java2"/>
+		<constructor-arg value="20" type="int"/>
+	</bean>
+	
+	<bean id="mc4" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="강상국" />
+		<constructor-arg value="20" type="int"/>
+		<constructor-arg value="java2" index="0"/>
+	</bean>
+	
+	<bean id="mc5" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="hardkyo" index="0"/>
+		<constructor-arg value="강상국" />
+		<constructor-arg value="100000000" type="double"/>
+		<constructor-arg value="20" type="int"/>
+	</bean>
+
+	<bean id="mc6" class="com.kitri.di.step12.MemberDto">
+		<constructor-arg value="hardkyo" index="0"/>
+		<constructor-arg value="강상국" />
+		<constructor-arg value="100000000" type="double"/>
+		<constructor-arg value="20" type="int"/>
+		<constructor-arg ref="AddressDto" />
+	</bean>
+	<bean id="AddressDto" class="com.kitri.di.step12.AddressDto">
+		<constructor-arg value="152-135"/>
+		<constructor-arg value="경기도 화성시"/>
+		<constructor-arg value="한화아파트"/>
+	</bean>
+	
+	<bean id="mp1" class="com.kitri.di.step12.MemberDto">
+		<property name="id" value="jav2"/>
+		<property name="name" value="강상국"/>
+	</bean>
+
+	<bean id="mp2" class="com.kitri.di.step12.MemberDto">
+		<property name="id" value="jav2"/>
+		<property name="name" value="강상국"/>
+		<property name="addressDto" ref="AddressDto"/>
+		<property name="age" value="20"/>
+		<property name="money" value="10000000"/>
+	</bean>
+	
+</beans>

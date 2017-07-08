@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd">
+	
+	<bean id="oracle" class="com.kitri.di.step07.OraDBConnection"/>
+	<bean id="mssql" class="com.kitri.di.step07.MsDBConnection"/>
+	<bean id="memberDao" name="mdao,dao" class="com.kitri.di.step07.MemberDao" init-method="homin">
+		<!--별칭을 붙일 수 있음 name : "dao,mdao"-->
+		<constructor-arg ref="oracle"/>
+	</bean>
+
+</beans>

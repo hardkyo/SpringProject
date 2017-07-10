@@ -1,6 +1,7 @@
 package com.kitri.di.step12;
 
 public class MemberDto {
+	
 	private String id;
 	private String name;
 	private double money;

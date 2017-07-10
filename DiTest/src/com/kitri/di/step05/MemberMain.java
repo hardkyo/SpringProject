@@ -7,6 +7,7 @@ import com.kitri.di.model.MemberDto;
 public class MemberMain {
 
 	public static void main(String[] args) {
+		
 		MemberDao memberDao = new MemberDao(new OraDBConnection());
 		
 		MemberDto memberDto = new MemberDto();

@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd">
+	
+	<bean id="mc" class="com.kitri.aop.controller.MemberController">
+		<property name="memberService" ref="ms"></property>
+	</bean>
+	<bean id="ms" class="com.kitri.aop.service.MemberService">
+		<property name="memberDao" ref="md"></property>
+	</bean>
+	<bean id="md" class="com.kitri.aop.dao.MemberDao">
+		<property name="jdbcTemplate" ref="jt"></property>
+	</bean>
+	
+	<bean id="ds" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"></property>
+		<property name="url" value="jdbc:oracle:thin:@192.168.18.106:1521:orcl"></property>
+		<property name="username" value="kitri"></property>
+		<property name="password" value="kitri"></property>		
+	</bean>
+	
+	
+	<bean id="jt" class="org.springframework.jdbc.core.JdbcTemplate">
+		<constructor-arg ref="ds"/>
+	</bean>
+	
+	
+	<bean id="pta" class="com.kitri.aop.step01.advice.PerformanceTraceAdvice"/>
+		
+		<aop:config>
+			<aop:aspect id="traceAspect" ref="pta">
+				<aop:pointcut id="tracePoint" expression="execution(public * com.kitri.aop..*Dao.*Member(..))"/>
+				<aop:around method="trace" pointcut-ref="tracePoint"/>
+			</aop:aspect>
+		</aop:config>
+
+</beans>

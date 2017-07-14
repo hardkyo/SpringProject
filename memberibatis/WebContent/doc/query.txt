@@ -1,0 +1,28 @@
+-- 아이디중복검사
+select count(id)
+from member
+where id=?
+
+-- 우편번호검사
+select	substr(zipcode, 1, instr(zipcode, '-') - 1) zip1,
+		substr(zipcode, instr(zipcode, '-') + 1) zip2,
+		sido, gugun, dong, nvl(bunji, ' ') bunji
+from zipcode
+where dong like '%'||?||'%'
+
+-- 회원가입
+insert all
+	into member (id, name, pass, email1, email2)
+	values (?, ?, ?, ?, ?)
+	into member_detail (id, tel1, tel2, tel3, zip1, zip2, addr1, addr2, joindate)
+	values (?, ?, ?, ?, ?, ?, ?, ?, sysdate) 
+select * from dual
+
+-- 로그인
+select id, name, email1, email2 
+from member 
+where id=? and pass=?
+
+-- 회원수정
+select * from member m, member_detail md
+where m.id=md.id and m.id=?

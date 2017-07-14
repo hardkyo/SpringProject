@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" 
+"http://ibatis.apache.org/dtd/sql-map-2.dtd">
+
+<sqlMap namespace="lg">
+    <select id="login" parameterClass="java.util.Map" resultClass="memberDto">
+        select id, name, email1, email2 
+        from member
+        where id=#userid# and pass=#userpwd#
+    </select>
+</sqlMap>
+
+
+
+
+
+
+
+
+
+
+

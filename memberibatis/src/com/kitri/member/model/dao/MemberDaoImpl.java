@@ -34,7 +34,6 @@ public class MemberDaoImpl implements MemberDao {
 		try {
 			return SqlMapConfig.getSqlMapClient().update("rg.join", memberDetailDto);
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return 0;
@@ -53,7 +52,7 @@ public class MemberDaoImpl implements MemberDao {
 	@Override
 	public MemberDetailDto getMember(String id) {
 		try {
-			return (MemberDetailDto) SqlMapConfig.getSqlMapClient().queryForObject("getmember", id);
+			return (MemberDetailDto) SqlMapConfig.getSqlMapClient().queryForObject("rg.getmember", id);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
@@ -62,12 +61,28 @@ public class MemberDaoImpl implements MemberDao {
 
 	@Override
 	public int modify(MemberDetailDto memberDetailDto) {
-		return 0;
+		int cnt = 0;
+		try {
+			cnt = SqlMapConfig.getSqlMapClient().update("rg.modify_detail", memberDetailDto);
+			cnt += SqlMapConfig.getSqlMapClient().update("rg.modify", memberDetailDto);
+			return cnt;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 
 	@Override
 	public int delete(String id) {
-		return 0;
+		int cnt =0;
+		try {
+			cnt = SqlMapConfig.getSqlMapClient().delete("rg.delete", id);
+			cnt += SqlMapConfig.getSqlMapClient().delete("rg.delete_detail", id);
+			return cnt;
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return cnt;
 	}
 
 }

@@ -134,10 +134,10 @@ public class MemberController extends HttpServlet {
 			MemberDto memberDto = (MemberDto) request.getSession().getAttribute("loginInfo");
 			if (memberDto != null) {
 				String id = memberDto.getId();
-				MemberDetailDto mmdto = memberService.getMember(id);
-				if (mmdto != null) {
+				MemberDetailDto memberDetailDto = memberService.getMember(id);
+				if (memberDetailDto != null) {
 					path = "/join/modify.jsp";
-					request.setAttribute("modify", mmdto);
+					request.setAttribute("modify", memberDetailDto);
 					flag = true;
 
 				}
@@ -146,9 +146,36 @@ public class MemberController extends HttpServlet {
 
 			}
 		} else if("modify".equals(act)) {
-			
+			MemberDto memberDto = (MemberDto) request.getSession().getAttribute("loginInfo");
+			MemberDetailDto memberDetailDto = new MemberDetailDto();
+			memberDetailDto.setId(memberDto.getId());
+			memberDetailDto.setPass(request.getParameter("pass"));
+			memberDetailDto.setEmail1(request.getParameter("email1"));
+			memberDetailDto.setEmail2(request.getParameter("email2"));
+			memberDetailDto.setZip1(request.getParameter("zip1"));
+			memberDetailDto.setZip2(request.getParameter("zip2"));
+			memberDetailDto.setAddr1(request.getParameter("addr1"));
+			memberDetailDto.setAddr2(request.getParameter("addr2"));
+			memberDetailDto.setTel1(request.getParameter("tel1"));
+			memberDetailDto.setTel2(request.getParameter("tel2"));
+			memberDetailDto.setTel3(request.getParameter("tel3"));
+			int cnt = memberService.modify(memberDetailDto);
+			if(cnt != 0) {
+				path = "/join/modifyok.jsp";
+				request.setAttribute("userInfo", memberDetailDto);
+				flag = true;
+			} else {
+				path = "/join/modifyfail.jsp";
+			}
 		} else if("delete".equals(act)) {
-			
+			MemberDto memberDto = (MemberDto) request.getSession().getAttribute("loginInfo");
+			String id = memberDto.getId();
+			int cnt = memberService.delete(id);
+			if (cnt != 0) {
+				path = "/join/deleteok.jsp";
+			} else {
+				path = "/join/deletefail.jsp";
+			}
 		} else if("maillist".equals(act)) {
 			path = "/mail/maillist.jsp";
 		}

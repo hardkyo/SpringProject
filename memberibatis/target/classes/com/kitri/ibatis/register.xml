@@ -33,6 +33,28 @@
         where m.id=md.id and m.id=#id#
     </select>
     
+    <insert id="modify" parameterClass="memberDetailDto">
+        update MEMBER
+        set pass=#pass#, email1=#email1#, email2=#email2#, addr1=#addr1#, addr2=#addr2#
+        where id=#id#
+    </insert>
+    
+    <insert id="modify_detail">
+        update MEMBER_Detail
+        set addr1=#addr1#, addr2=#addr2#
+        where id=#id#
+    </insert>
+    
+    <delete id="delete">
+        delete member
+        where id = #id#
+    </delete>
+    <delete id="delete_detail">
+        delete member_detail
+        where id = #id#
+    </delete>
+    
+    
 </sqlMap>
 
 

@@ -2,8 +2,8 @@
     pageEncoding="EUC-KR" import="com.kitri.member.model.*"%>
     <%
     String root = request.getContextPath();
-    MemberDetailDto mmdto = (MemberDetailDto) request.getAttribute("modify");
-    if(mmdto!=null){
+    MemberDetailDto memberDetailDto = (MemberDetailDto) request.getAttribute("modify");
+    if(memberDetailDto!=null){
     %>
     
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -22,7 +22,7 @@ function modify(){
 		alert("비밀번호 확인!");
 		return;
 	} else {
-		document.joinform.action = "<%=root%>/user";
+		document.joinform.action = "/memberibatis/user";
 		document.joinform.submit();
 	}
 }
@@ -45,7 +45,7 @@ function openidcheck(){
 	 <table width="780" height="700" cellspacing="4" cellpadding="5">
 			<tr>
 			 <td class="td1">이름<font color="red">*</font></td>
-			 <td class="td3"><%=mmdto.getName() %></td>
+			 <td class="td3"><%=memberDetailDto.getName() %></td>
 			</tr>
 			
 <!--
@@ -63,7 +63,7 @@ function openidcheck(){
 
 			<tr>
 			 <td class="td2">아이디(ID)<font color="red">*</font></td>
-			 <td class="td4"><%=mmdto.getId() %></td>
+			 <td class="td4"><%=memberDetailDto.getId() %></td>
 			</tr>
 
 			<tr>
@@ -110,8 +110,8 @@ function openidcheck(){
 			   <option value="017">017</option>
 			   <option value="018" >018</option>
 			  </select> -
-					<input type="text" name="tel2" size="4" maxlength="4" value="<%=mmdto.getTel2() %>"> -
-					<input type="text" name="tel3" size="4" maxlength="4" value="<%=mmdto.getTel3() %>"><br>
+					<input type="text" name="tel2" size="4" maxlength="4" value="<%=memberDetailDto.getTel2() %>"> -
+					<input type="text" name="tel3" size="4" maxlength="4" value="<%=memberDetailDto.getTel3() %>"><br>
 <!--
 			  유선전화&nbsp;<select name="tel1">
 			   <option value="">----</option>
@@ -132,23 +132,23 @@ function openidcheck(){
 
 			<tr>
 			 <td class="td2">우편번호<font color="red">*</font></td>
-			 <td class="td4"><input type="text" name="zip1" id="zip1" value="<%=mmdto.getZip1() %>" size="5" maxlength="3" readonly="readonly"> -
-			 <input type="text" name="zip2" id="zip2" value="<%=mmdto.getZip2() %>" size="5" maxlength="3" readonly="readonly">
+			 <td class="td4"><input type="text" name="zip1" id="zip1" value="<%=memberDetailDto.getZip1() %>" size="5" maxlength="3" readonly="readonly"> -
+			 <input type="text" name="zip2" id="zip2" value="<%=memberDetailDto.getZip2() %>" size="5" maxlength="3" readonly="readonly">
 			 <input type="button" value="우편번호검색" onclick="javascript:openzip();"></td>
 			</tr>
 			<tr>
 			 <td class="td1">주소<font color="red">*</font></td>
-			 <td class="td3"><input type="text" name="addr1" id="addr1" value="<%=mmdto.getAddr1() %>" size="100"></td>
+			 <td class="td3"><input type="text" name="addr1" id="addr1" value="<%=memberDetailDto.getAddr1() %>" size="100"></td>
 			</tr>
 
 			<tr>
 			 <td class="td2">상세주소<font color="red">*</font></td>
-			 <td class="td4"><input type="text" name="addr2" id="addr2" size="100" value="<%=mmdto.getAddr2() %>"></td>
+			 <td class="td4"><input type="text" name="addr2" id="addr2" size="100" value="<%=memberDetailDto.getAddr2() %>"></td>
 			</tr>
 
             <tr>
 			 <td class="td1">주로 쓰는 이메일<font color="red">*</font></td>
-			 <td class="td3"><input type="text" name="email1" id="email1" value="<%=mmdto.getEmail1() %>" size="12"> @
+			 <td class="td3"><input type="text" name="email1" id="email1" value="<%=memberDetailDto.getEmail1() %>" size="12"> @
 					<!--<input type="text" name="direct" value="" size=12>-->
 	                <select name="email2">
 					<!--<option value="naver.com">직접입력</option>-->
@@ -179,7 +179,7 @@ function openidcheck(){
 			<tr>
              <td colspan="2" align="center">
              <input type="button" value="회원수정" onclick="javascript:modify();">
-&nbsp;&nbsp;
+					&nbsp;&nbsp;
 	          <input type="reset" value="취소">
 	         </td>
 	   		</tr>
@@ -188,3 +188,6 @@ function openidcheck(){
   </center>
  </body>
 </html>
+<% }else {
+	response.sendRedirect(root+"/user?act=main");
+} %>

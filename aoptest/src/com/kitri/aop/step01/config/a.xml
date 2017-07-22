@@ -28,6 +28,7 @@
 	</bean>
 	
 	
+	<!--여기서 부터는 AOP설정-->
 	<bean id="pta" class="com.kitri.aop.step01.advice.PerformanceTraceAdvice"/>
 		
 		<aop:config>
